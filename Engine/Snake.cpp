@@ -44,9 +44,8 @@ void Snake::Eat(Goal & goal)
 		.isOvelaping(goal.getLocation()))
 	{
 		goal.Move();
-
-		segments[1 + nSegments].setLocation(segments[nSegments].getLocation());
-		segments[1 + nSegments].setColor({ (unsigned char)redDist(rng),(unsigned char)130,(unsigned char)blueDist(rng) });
+		segments[nSegments].setColor({ (unsigned char)redDist(rng),(unsigned char)130,(unsigned char)blueDist(rng) });
+		segments[nSegments].setLocation(segments[nSegments].getLocation());
 		++nSegments;
 	
 	}

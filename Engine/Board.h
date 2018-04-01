@@ -17,8 +17,8 @@ public:
 	bool isOutOfBoard(Location& in_location) const;
 private:
 	static constexpr int fieldSize = 20;
-	static constexpr int width = Graphics::ScreenWidth / fieldSize;
-	static constexpr int height = Graphics::ScreenHeight / fieldSize;
+	static constexpr int width = Graphics::ScreenWidth / fieldSize -1;
+	static constexpr int height = Graphics::ScreenHeight / fieldSize -1;
 	Graphics& gfx;
 
 

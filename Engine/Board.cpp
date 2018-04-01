@@ -30,8 +30,8 @@ int Board::getFieldSize() const
 
 bool Board::isOutOfBoard(Location& in_location) const
 {
-	return in_location.x < 0 || in_location.x >= width
-		|| in_location.y < 0 || in_location.y >= height;
+	return in_location.x < 0 || in_location.x > width
+		|| in_location.y < 0 || in_location.y > height;
 }
 
 
