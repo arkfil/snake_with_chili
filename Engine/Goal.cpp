@@ -5,10 +5,10 @@
 Goal::Goal(Board & b) :
 	board(b),
 	rng(rd()),
-	locationDistX(0, board.getWidth()),
-	locationDistY(0, board.getHeight())
+	locationDistX(board.getLeftCornerX()/ board.getEgdeWidth(), board.getWidth()),
+	locationDistY(board.getLeftCornerY()/ board.getEgdeWidth(), board.getHeight())
 {
-	location = { locationDistX(rng),locationDistY(rng) };
+	Move();
 	color = Colors::Red;
 }
 
@@ -22,9 +22,10 @@ void Goal::Draw() const
 	board.Draw(location, color);
 }
 
-void Goal::Move()
+Location Goal::Move()
 {
 	location = { locationDistX(rng),locationDistY(rng) };
+	return location;
 }
 
 Location Goal::getLocation() const

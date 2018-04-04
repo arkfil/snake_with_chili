@@ -10,7 +10,7 @@ public:
 	Goal(Board &b);
 	~Goal();
 	void Draw() const;
-	void Move();
+	Location Move();
 	Location getLocation() const;
 	int getDimension() const;
 private:

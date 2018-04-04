@@ -31,9 +31,9 @@
 class Game
 {
 public:
-	Game( class MainWindow& wnd );
-	Game( const Game& ) = delete;
-	Game& operator=( const Game& ) = delete;
+	Game(class MainWindow& wnd);
+	Game(const Game&) = delete;
+	Game& operator=(const Game&) = delete;
 	void Go();
 private:
 	void ComposeFrame();
@@ -42,21 +42,30 @@ private:
 	/*  User Functions              */
 	/********************************/
 private:
-	MainWindow& wnd;
+	MainWindow & wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
 
 	Board board;
 	Snake snake;
-	Location innertionDeltaL{1,0};
+	Location innertionDeltaL[10] = {{ 1,0 } ,{-2,-2}
+								,{ -2,-2 } ,{ -2,-2 } 
+								,{ -2,-2 }};
+	bool iterationClicked = false;
+
+	enum class clickBuffer {
+		clickOne, clickTwo, clickThree
+	};
+
+
 	//std::random_device rd;
 	//std::mt19937 rng(rd());
 	//std::uniform_int_distribution<int> colorDist(0, 255);
-	int snakeRefreshRate = 20;
+	int snakeRefreshRate = 300;
 	int refreshCounter = 0;
 	Goal goal;
 	bool gameIsOver = false;
-
+	bool startPressed = false;
 	/********************************/
 };

@@ -1,7 +1,7 @@
 #include "Snake.h"
 
 
-Snake::Snake() : rng(rd()), redDist(0, 32), blueDist(0, 32)
+Snake::Snake() : rng(rd()), redDist(0, 52), blueDist(0, 52)
 {							
 	nSegments = 3;
 	segments[0].setLocation({ 4, 2 });
@@ -20,11 +20,6 @@ Snake::~Snake()
 
 void Snake::Move(Location deltaL, Board& board)
 {
-	//if (((segments[0].getLocation()+deltaL).x >= board.getWidth()) 
-	//	|| ((segments[0].getLocation() + deltaL).y >= board.getHeight())
-	//	|| ((segments[0].getLocation() + deltaL).x < 0)
-	//	|| ((segments[0].getLocation() + deltaL).y < 0))
-	//	return;
 	for (int i = nSegments; i > 0; --i) {
 			segments[i].setLocation(segments[i - 1].getLocation());
 	}
@@ -38,17 +33,22 @@ void Snake::Draw(Board& board)
 	}
 }
 
-void Snake::Eat(Goal & goal)
+bool Snake::TryEat(Goal & goal)
 {
 	if (segments[0].getLocation()
 		.isOvelaping(goal.getLocation()))
 	{
 		goal.Move();
+		while (this->isInTile(goal.getLocation())) {
+			goal.Move();
+		}
+
+		segments[nSegments].setLocation(segments[0].getLocation());
 		segments[nSegments].setColor({ (unsigned char)redDist(rng),(unsigned char)130,(unsigned char)blueDist(rng) });
-		segments[nSegments].setLocation(segments[nSegments].getLocation());
 		++nSegments;
-	
+		return true;
 	}
+	return false;
 }
 
 Location Snake::getHeadLocation() const
@@ -60,6 +60,15 @@ bool Snake::ateItself() const
 {
 	for (int i = 1; i < nSegments; ++i) {
 		if (segments[0].getLocation() == segments[i].getLocation())
+			return true;
+	}
+	return false;
+}
+
+bool Snake::isInTile(Location in_location)
+{
+	for (int i = 0; i < nSegments; ++i) {
+		if (in_location == segments[i].getLocation())
 			return true;
 	}
 	return false;

@@ -33,7 +33,7 @@ public:
 	~Snake();
 	void Move(Location deltaL, Board& board);
 	void Draw(Board& board);
-	void Eat(Goal& goal);
+	bool TryEat(Goal& goal);
 	Location getHeadLocation() const;
 	bool ateItself() const;
 
@@ -45,7 +45,7 @@ private:
 	std::mt19937 rng;
 	std::uniform_int_distribution<int> redDist;
 	std::uniform_int_distribution<int> blueDist;
-
+	bool isInTile(Location in_location);
 
 
 };
